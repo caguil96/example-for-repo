@@ -8,8 +8,10 @@ const getOptions = async () => {
   const url = https://dog.ceo/api/breeds/list/all
   try {
     const response = await axios.get(url);
-    console.log(response);
-
+    // console.log(response.data.message);
+    let breedList = Object.keys(response.data.message);
+    // console.log(breedList);
+    setOptions(breedList);
   } catch (error) {
     console.error(error);
 
@@ -20,6 +22,19 @@ getOptions
 
 // Create the form option tags
 
+function setOptions(list) {
+  // Creates dynamic HTML
+  console.log(list);
+  const selectTag = document.querySelector('#select-breed');
+  list.forEach((breed) => {
+    // we should each breed as opposed to the array of breed
+    console.log(breed);
+    const optionTag = document.createElement('option');
+    optionTag.textContent = breed;
+    optionTag.value = breed;
+    selectTag.append(optionTag);
+  })
+}
 
 // Get option tag value
 
